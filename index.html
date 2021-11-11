@@ -1,14 +1,30 @@
+
 <!-- CSS  -->
  <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
 <style>
-.button {
+.intro {
   border: none;
   color: white;
-  padding: 16px 32px;
+  background-color: blue;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
@@ -27,8 +43,7 @@
 </style>
 
 <!-- HTML -->
-<h1 id="title"></h1>
-<p id="substr"></p>
+<button class="intro">Welcome to Papou TV!</button>
 <button class="button skaiButton", onclick="skaiNews()">Skai News</button>
 <button class="button skaiButton", onclick="skaiTV()">Skai Live TV</button>
 <button class="button skaiButton", onclick="ertWorld()">ERT Live TV</button>
@@ -50,24 +65,19 @@ var mm = String(today.getMonth()+1).padStart(2,'0');
 var dd = String(today.getDate()).padStart(2,'0');
 var dstr = yyyy.concat(mm,dd);
 var newsURL = "".concat("https://videostream.skai.gr/skaivod/_definst_/mp4:skai/",yyyy,mm,"/video/news/nea",dstr,".mp4/chunklist.m3u8")
-var title = "Welcome to Papou TV!";
-document.getElementById('title').innerText = title;
 var player = videojs('hls-example');
 var poster = "https://greekreporter.com/wp-content/uploads/2021/02/greek-flag-peter-guilliatt-cc-by-nc-nd-2.0.jpg";
 var ertWorldURL = "https://ert-live-bcbs15228.siliconweb.com/media/ert_world/ert_world.m3u8"
 function skaiNews() {
 	var newsTitle = "Showing Skai News For: ".concat(yyyy," ",mm," ",dd);
-	document.getElementById('substr').innerText = newsTitle;
 	player.src({type: "application/x-mpegURL", src: newsURL});
 	player.play();
 }
 function skaiTV() {
-	document.getElementById('substr').innerText = "Showing Skai Live TV";
 	player.src({type: "application/x-mpegURL", src: liveURL});
 	player.play();
 }
 function ertWorld() {
-	document.getElementById('substr').innerText = "Showing ERT World Live TV";
 	player.src({type: "application/x-mpegURL", src: ertWorldURL});
 	player.play();
 }
