@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 <!-- CSS  -->
- <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+<link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
 <style>
 .intro {
   border: none;
@@ -14,7 +17,7 @@
   font-weight: bold;
   margin: 4px 2px;
   transition-duration: 0.4s;
-  cursor: pointer;
+  cursor: text;
 }
 
 .button {
@@ -31,8 +34,8 @@
 }
 
 .skaiButton {
-  background-color: white; 
-  color: black; 
+  background-color: white;
+  color: black;
   border: 2px solid #008CBA;
 }
 
@@ -41,45 +44,43 @@
   color: white;
 }
 </style>
+<!-- JS code -->
+<!-- Video JS Libraries -->
+    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+</head>
 
+<body>
 <!-- HTML -->
-<button class="intro">Welcome to Papou TV!</button>
+<button class="intro" disabled>Welcome to Papou TV!</button>
 <button class="button skaiButton", onclick="skaiNews()">Skai News</button>
 <button class="button skaiButton", onclick="skaiTV()">Skai Live TV</button>
 <button class="button skaiButton", onclick="ertWorld()">ERT Live TV</button>
-<video id='hls-example'  class="video-js vjs-default-skin" width="1250" height="500" controls>
+<video id='papouTV'  class="video-js vjs-default-skin" width="1250" height="500" controls>
 <source type="application/x-mpegURL" src="">
 </video>
-<p id="demo"></p>
+<!-- Page Script -->
+    <script>
+    var newsURL = "https://videostream.skai.gr/skaivod/_definst_/mp4:skai/202111/video/news/noon20211118.mp4/chunklist.m3u8";
+    var liveURL = "https://skai-live-back.siliconweb.com/media/cambria4/index.m3u8";
+    var ertWorldURL = "https://ert-live-bcbs15228.siliconweb.com/media/ert_world/ert_world.m3u8";
 
-<!-- JS code -->
-<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-<script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
-<script>
-var today = new Date();
-var liveURL = "https://skai-live-back.siliconweb.com/media/cambria4/index.m3u8"
-var yyyy = String(today.getFullYear());
-var mm = String(today.getMonth()+1).padStart(2,'0');
-var dd = String(today.getDate()).padStart(2,'0');
-var dstr = yyyy.concat(mm,dd);
-var newsURL = "".concat("https://videostream.skai.gr/skaivod/_definst_/mp4:skai/",yyyy,mm,"/video/news/nea",dstr,".mp4/chunklist.m3u8")
-var player = videojs('hls-example');
-var poster = "https://greekreporter.com/wp-content/uploads/2021/02/greek-flag-peter-guilliatt-cc-by-nc-nd-2.0.jpg";
-var ertWorldURL = "https://ert-live-bcbs15228.siliconweb.com/media/ert_world/ert_world.m3u8"
-function skaiNews() {
-	var newsTitle = "Showing Skai News For: ".concat(yyyy," ",mm," ",dd);
-	player.src({type: "application/x-mpegURL", src: newsURL});
-	player.play();
-}
-function skaiTV() {
-	player.src({type: "application/x-mpegURL", src: liveURL});
-	player.play();
-}
-function ertWorld() {
-	player.src({type: "application/x-mpegURL", src: ertWorldURL});
-	player.play();
-}
-skaiNews()
-</script>
+    var player = videojs('papouTV');
+
+    function skaiNews() {
+    	player.src({type: "application/x-mpegURL", src: newsURL});
+    	player.play();
+    }
+    function skaiTV() {
+    	player.src({type: "application/x-mpegURL", src: liveURL});
+    	player.play();
+    }
+    function ertWorld() {
+    	player.src({type: "application/x-mpegURL", src: ertWorldURL});
+    	player.play();
+    }
+    skaiNews()
+    </script>
+</body>
+</html>
