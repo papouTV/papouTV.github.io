@@ -1,20 +1,11 @@
 from pyscript import when
 from js import videojs, document, XMLHttpRequest
 from io import StringIO
-
-# from pyodide.http import open_url
+from pyodide.http import open_url
 from bs4 import BeautifulSoup as bs
 import datetime
 import re
 import json
-
-
-def open_url(url: str) -> StringIO:
-    req = XMLHttpRequest.new()
-    req.open("GET", url, False)
-    req.setRequestHeader("Origin", "*")
-    req.send(None)
-    return StringIO(req.response)
 
 
 def debug(message, level):
