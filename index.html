@@ -1,86 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- Recommended meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <script type="module" src="https://pyscript.net/snapshots/2023.11.1.RC3/core.js"></script>
+        <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+        <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://pyscript.net/snapshots/2023.09.1.RC2/core.css">
+        <script type="py" src="./main.py" config="./config.json"></script>
+        <style>
+            body {
+              background-color: rgb(202, 196, 196);
+            }
+            .button {
+              background: rgb(187, 187, 240);
+              border: none;
+              padding: 12px 24px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 18px;
+              margin: 4px 2px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+            }
+            .button:hover {
+              background-color: rgb(228, 79, 79);
+              color: white;
+            }
 
-<head>
-<!-- CSS  -->
-<link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
-<style>
-.intro {
-  border: none;
-  color: white;
-  background-color: blue;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: text;
-}
+            .debug {
+              font-weight: bold;
+            }
 
-.button {
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+            .Error {
+              background: rgb(228, 79, 79);
+            }
+            
+            .info {
+              background: rgb(187, 187, 240);
+            }
 
-.skaiButton {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
+            .debug_div {
+              max-width: 50%;
+              border: double;
+              background: rgb(65, 64, 64);
+            }
 
-.skaiButton:hover {
-  background-color: #008CBA;
-  color: white;
-}
-</style>
-<!-- JS code -->
-<!-- Video JS Libraries -->
-    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
-</head>
+            .controls_box {
+              background: rgb(65, 64, 64);
+              max-width: 50%;
+            }
 
-<body>
-<!-- HTML -->
-<button class="intro" disabled>Welcome to Papou TV!</button>
-<button class="button skaiButton", onclick="skaiNews()">Skai News</button>
-<button class="button skaiButton", onclick="skaiTV()">Skai Live TV</button>
-<button class="button skaiButton", onclick="ertWorld()">ERT Live TV</button>
-<video id='papouTV'  class="video-js vjs-default-skin" width="1250" height="500" controls>
-<source type="application/x-mpegURL" src="">
-</video>
-<!-- Page Script -->
-    <script>
-    var newsURL = "https://videostream.skai.gr/skaivod/_definst_/mp4:skai/202208/video/news/noon20220828.mp4/chunklist.m3u8";
-    var liveURL = "https://skai-live-back.siliconweb.com/media/cambria4/index.m3u8";
-    var ertWorldURL = "https://ert-live-bcbs15228.siliconweb.com/media/ert_world/ert_world.m3u8";
+            .ptv_footer {
+              position:fixed;
+              bottom:2%;
+              left:2%;
+              right:2%;
+              border: 1px solid black;
+              width: 50%;
+              margin-left: auto;
+              margin-right: auto;
+              padding-left: 15px;
+            }
+            </style>
+    </head>
 
-    var player = videojs('papouTV');
-
-    function skaiNews() {
-    	player.src({type: "application/x-mpegURL", src: newsURL});
-    	player.play();
-    }
-    function skaiTV() {
-    	player.src({type: "application/x-mpegURL", src: liveURL});
-    	player.play();
-    }
-    function ertWorld() {
-    	player.src({type: "application/x-mpegURL", src: ertWorldURL});
-    	player.play();
-    }
-    skaiNews()
-    </script>
-</body>
+    <body>
+        <div id="ptv_header">
+          <h1>Papou TV</h1>
+          <h4>Click the buttons below to play content.</h4>
+        </div>
+        <div id="ptv-app">
+          <div id="controls_box" class="controls_box">
+            <button id="skaiNews" class="button">Skai News</button>
+            <button id="skaiButton" class="button">Skai Live TV</button>
+          </div>
+            </br>
+            <video id="ptv-player" class="video-js vjs-default-skin" width="1250" height="500" controls></video>
+        </div>
+        </br>
+        <div id="debug_div" class="debug_div"></div>
+        <div id="ptv_footer" class="ptv_footer">
+          <h4>This app demo was created using <a href="pyscript.net">PyScript</a></h4>
+          <p>I dedicate this app demo to my Papou :)</p>
+        </div>
+    </body>
 </html>
